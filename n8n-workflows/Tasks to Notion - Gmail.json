@@ -1,0 +1,106 @@
+{
+  "name": "Tasks to Notion - Gmail",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "filters": {
+          "labelIds": [
+            "Label_9219083270812578227"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8e03aa41-38d1-4309-8ac9-f8bc0cbe5cf8",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EXEHGvYEF3tAvKYp",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "187ef3c6-cdaa-81e1-9eec-f6323f5fc0b2",
+          "mode": "list",
+          "cachedResultName": "TasksCurrent",
+          "cachedResultUrl": "https://www.notion.so/187ef3c6cdaa81e19eecf6323f5fc0b2"
+        },
+        "title": "={{ $json.Subject }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Assignee|people",
+              "peopleValue": [
+                "88382f02-8def-4322-be46-0fbfd9f02002"
+              ]
+            },
+            {
+              "key": "Description|rich_text",
+              "textContent": "={{ $json.snippet }}"
+            },
+            {
+              "key": "URL|url",
+              "urlValue": "=https://mail.google.com/mail/u/chellehoniker@gmail.com/#inbox/{{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "134f2ebc-0338-4135-a4b8-4307fa7d010c",
+      "name": "Create a database page",
+      "credentials": {
+        "notionApi": {
+          "id": "rjOmW8bXZistRH4x",
+          "name": "Notion account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Create a database page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "08c79c31-ca1b-43e1-9a6e-bbb5ee377293",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1cfd7bf51592a1d455b4db6e444dce94d4b7eb387d652e3db36fd7014da5ccfc"
+  },
+  "id": "o8UdSkvEqokNQ5lC",
+  "tags": []
+}
